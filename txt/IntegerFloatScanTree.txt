@@ -1,0 +1,84 @@
+zero
+nonZero
+octalDigits
+nonOctalDecimalDigits
+digits
+hexDigits
+
+dot
+hexX
+exponentIndicator
+sign
+
+longTypeSuffix
+floatTypeSuffix
+
+START
+	zero 1
+	nonZero 2
+	dot 3
+
+1* // [0]
+	octalDigits 4
+	nonOctalDecimalDigits 5
+	dot 6
+	HexX 7
+	exponentIndicator 8
+	longTypeSuffix 9
+	floatTypeSuffix 10
+
+2* // [non-zero]
+	digits 2
+	dot 6
+	exponentIndicator 8
+	longTypeSuffix 9
+	floatTypeSuffix 10
+
+3 // [.]
+	digits 6
+
+4* // [0 octaldigits] this is either octal or float
+	octalDigits 4
+	nonOctalDecimalDigits 5
+	dot 6
+	exponentIndicator 8
+	longTypeSuffix 9
+	flotTypeSuffix 10
+
+5 // this is a bit of a float, not terminal
+	digits 5
+	dot 6
+	exponentIndicator 8
+	floatTypeSuffix 10
+
+6* // [digits.] this is a float, could be terminal
+	digits 6
+	exponentIndicator 8
+	floatTypeSuffix 10
+
+7 // [0x] hex, not terminal
+	hexDigits 11
+
+8 // eg: 1.1e	not terminal
+	digits 12
+	sign 13
+
+9* long, done-done
+
+10* float, done-done
+
+11* // eg: 0xABC
+	hexDigits 11
+	longTypeSuffix 9
+
+12* // eg: 1.1e1
+	digits 12
+	floatTypeSuffix 10
+
+13 // eg: 1.1e- not terminal
+	digits 12
+	floatTypeSuffix 10
+
+
+
+

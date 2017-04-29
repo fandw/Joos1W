@@ -1,0 +1,144 @@
+Chapter 4
+
+Type PrimitiveType
+Type ReferenceType
+
+PrimitiveType NumericType
+PrimitiveType boolean
+
+NumericType IntegralType
+NumericType FloatingPointType
+
+IntegralType byte
+IntegralType short
+IntegralType int
+IntegralType long
+IntegralType char
+
+FloatingPointType float
+FloatingPointType double
+
+ReferenceType ClassOrInterfaceType
+ReferenceType ArrayType
+
+ClassOrInterfaceType ClassType
+ClassOrInterfaceType InterfaceType
+
+ClassType TypeName
+
+InterfaceType TypeName
+
+ArrayType Type [ ]
+
+Chapter 6
+
+PackageName	Identifier
+PackageName	PackageName . Identifier
+
+TypeName Identifier
+TypeName PackageOrTypeName . Identifier
+
+ExpressionName Identifier
+ExpressionName AmbiguousName . Identifier
+
+MethodName Identifier
+MethodName AmbiguousName . Identifier
+
+PackageOrTypeName Identifier
+PackageOrTypeName PackageOrTypeName . Identifier
+
+AmbiguousName Identifier
+AmbiguousName AmbiguousName . Identifier
+
+Chapter 7
+
+CompilationUnit PackageDeclaration* ImportDeclarations* TypeDeclarations*
+
+ImportDeclarations ImportDeclaration
+ImportDeclarations ImportDeclarations ImportDeclaration
+
+TypeDeclarations TypeDeclaration
+TypeDeclarations TypeDeclarations TypeDeclaration
+
+PackageDeclaration package PackageName
+
+ImportDeclaration SingleTypeImportDeclaration
+ImportDeclaration TypeImportOnDemandDeclaration
+
+SingleTypeImportDeclaration import TypeName ;
+
+TypeImportOnDemandDeclaration import PackageOrTypeName . * ;
+
+TypeDeclaration	ClassDeclaration
+TypeDeclaration InterfaceDeclaration
+TypeDeclaration ;
+
+Chapter 8
+
+ClassDeclaration ClassModifiers* class Identifier Super* Interfaces* ClassBody
+
+ClassModifiers ClassModifier
+ClassModifiers ClassModifiers ClassModifier
+
+ClassModifier public
+ClassModifier protected
+ClassModifier private
+ClassModifier abstract
+ClassModifier static
+ClassModifier final
+ClassModifier strictfp
+
+Super extends ClassType
+
+ClassType TypeName
+
+Interfaces implements InterfaceTypeList
+
+InterfaceTypeList InterfaceType
+InterfaceTypeList InterfaceTypeList , InterfaceType
+
+InterfaceType TypeName
+
+ClassBody { ClassBodyDeclarations* }
+
+ClassBodyDeclarations ClassBodyDeclaration
+ClassBodyDeclarations ClassBodyDeclarations ClassBodyDeclaration
+
+ClassBodyDeclaration ClassMemberDeclaration
+ClassBodyDeclaration InstanceInitializer
+ClassBodyDeclaration StaticInitializer
+ClassBodyDeclaration ConstructorDeclaration
+
+ClassMemberDeclaration FieldDeclaration
+ClassMemberDeclaration MethodDeclaration
+ClassMemberDeclaration ClassDeclaration						
+ClassMemberDeclaration InterfaceDeclaration
+ClassMemberDeclaration ;	
+
+FieldDeclaration FieldModifiers* Type VariableDeclarators ;
+
+VariableDeclarators	VariableDeclarator
+VariableDeclarators VariableDeclarators , VariableDeclarator
+
+VariableDeclarator VariableDeclaratorId
+VariableDeclarator VariableDeclaratorId = VariableInitializer
+
+VariableDeclaratorId Identifier
+VariableDeclaratorId VariableDeclaratorId [ ]
+
+VariableInitializer	Expression
+VariableInitializer ArrayInitializer
+
+FieldModifiers FieldModifier
+FieldModifiers FieldModifiers FieldModifier
+
+FieldModifier public
+FieldModifier protected
+FieldModifier private
+FieldModifier static
+FieldModifier final
+FieldModifier transient
+FieldModifier volatile
+
+
+

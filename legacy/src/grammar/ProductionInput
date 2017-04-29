@@ -1,0 +1,322 @@
+Goal:
+	bof CompilationUnit eof
+
+CompilationUnit:
+	PackageDeclarationopt ImportDeclarationsopt TypeDeclarationopt
+
+PackageDeclaration:
+	package Name ;
+
+Name:
+	identifier
+	Name . identifier
+
+ImportDeclarations:
+	ImportDeclaration
+	ImportDeclarations ImportDeclaration
+
+ImportDeclaration:
+	import Name ;
+	import Name . * ;
+
+TypeDeclaration:
+	ClassDeclaration
+	InterfaceDeclaration
+	;
+
+ClassDeclaration:
+	Modifiersopt class identifier Superopt Interfacesopt { ClassBodyDeclarationsopt }
+
+Modifiers:
+	Modifier
+	Modifiers Modifier
+
+Modifier: one of
+	public protected private
+	static
+	abstract final native
+
+Super:
+	extends ClassType
+
+Interfaces:
+	implements InterfaceTypeList
+
+InterfaceTypeList:
+	InterfaceType
+	InterfaceTypeList , InterfaceType
+
+ClassBodyDeclarations:
+	ClassBodyDeclaration
+	ClassBodyDeclarations ClassBodyDeclaration
+
+ClassBodyDeclaration:
+	FieldDeclaration
+	MethodDeclaration
+	ConstructorDeclaration
+
+FieldDeclaration:
+	Modifiersopt Type VariableDeclarator ;
+
+VariableDeclarator:
+	identifier
+	identifier = Expression
+
+MethodDeclaration:
+	MethodHeader MethodBody
+
+MethodHeader:
+	Modifiersopt Type identifier ( FormalParameterListopt )
+	Modifiersopt void identifier ( FormalParameterListopt )
+
+FormalParameterList:
+	FormalParameter
+	FormalParameterList , FormalParameter
+
+FormalParameter:
+	Type identifier
+
+MethodBody:
+	Block
+	;
+
+ConstructorDeclaration:
+	Modifiersopt ConstructorDeclarator ConstructorBody
+
+ConstructorDeclarator:
+	identifier ( FormalParameterListopt )
+
+ConstructorBody:
+	{ BlockStatementsopt }
+
+InterfaceDeclaration:
+	Modifiersopt interface identifier ExtendsInterfacesopt { InterfaceMemberDeclarationsopt }
+
+ExtendsInterfaces:
+	extends InterfaceType
+	ExtendsInterfaces , InterfaceType
+
+InterfaceMemberDeclarations:
+	InterfaceMemberDeclaration
+	InterfaceMemberDeclarations InterfaceMemberDeclaration
+
+InterfaceMemberDeclaration:
+	MethodHeader ;
+
+Block:
+	{ BlockStatementsopt }
+
+BlockStatements:
+	BlockStatement
+	BlockStatements BlockStatement
+
+BlockStatement:
+	LocalVariableDeclaration ;
+	Statement
+
+LocalVariableDeclaration:
+	Type identifier = Expression
+
+Statement:
+	StatementWithoutTrailingSubstatement
+	IfThenStatement
+	IfThenElseStatement
+	WhileStatement
+	ForStatement
+
+StatementNoShortIf:
+	StatementWithoutTrailingSubstatement
+	IfThenElseStatementNoShortIf
+	WhileStatementNoShortIf
+	ForStatementNoShortIf
+
+StatementWithoutTrailingSubstatement:
+	Block
+	EmptyStatement
+	ExpressionStatement
+	ReturnStatement
+
+EmptyStatement:
+	;
+
+ExpressionStatement:
+	StatementExpression ;
+
+StatementExpression:
+	Assignment
+	MethodInvocation
+	ClassInstanceCreationExpression
+
+IfThenStatement:
+	if ( Expression ) Statement
+
+IfThenElseStatement:
+	if ( Expression ) StatementNoShortIf else Statement
+
+IfThenElseStatementNoShortIf:
+	if ( Expression ) StatementNoShortIf else StatementNoShortIf
+
+WhileStatement:
+	while ( Expression ) Statement
+
+WhileStatementNoShortIf:
+	while ( Expression ) StatementNoShortIf
+
+ForStatement:
+	for ( ForInitopt ; Expressionopt ; ForUpdateopt ) Statement
+
+ForStatementNoShortIf:
+	for ( ForInitopt ; Expressionopt ; ForUpdateopt ) StatementNoShortIf
+
+ForInit:
+	StatementExpression
+	LocalVariableDeclaration
+
+ForUpdate:
+	StatementExpression
+
+ReturnStatement:
+	return Expressionopt ;
+
+Primary:
+	PrimaryNoNewArray
+	ArrayCreationExpression
+
+PrimaryNoNewArray:
+	Literal
+	this
+	( Expression )
+	ClassInstanceCreationExpression
+	FieldAccess
+	MethodInvocation
+	ArrayAccess
+
+ClassInstanceCreationExpression:
+	new ClassType ( ArgumentListopt )
+
+ArgumentList:
+	Expression
+	ArgumentList , Expression
+
+ArrayCreationExpression:
+	new PrimitiveType [ Expression ]
+	new Name [ Expression ]
+
+FieldAccess:
+	Primary . identifier
+
+MethodInvocation:
+	Name ( ArgumentListopt )
+	Primary . identifier ( ArgumentListopt )
+
+ArrayAccess:
+	Name [ Expression ]
+	PrimaryNoNewArray [ Expression ]
+
+CastExpression:
+	( PrimitiveType ) UnaryExpression
+	( Expression ) UnaryExpressionNotPlusMinus
+	( ArrayType ) UnaryExpressionNotPlusMinus
+
+PostfixExpression:
+	Primary
+	Name
+
+UnaryExpressionNotPlusMinus:
+	PostfixExpression
+	! UnaryExpression
+	CastExpression
+
+UnaryExpression:
+	- UnaryExpression
+	UnaryExpressionNotPlusMinus
+
+MultiplicativeExpression:
+	UnaryExpression
+	MultiplicativeExpression * UnaryExpression
+	MultiplicativeExpression / UnaryExpression
+	MultiplicativeExpression % UnaryExpression
+
+AdditiveExpression:
+	MultiplicativeExpression
+	AdditiveExpression + MultiplicativeExpression
+	AdditiveExpression - MultiplicativeExpression
+
+RelationalExpression:
+	AdditiveExpression
+	RelationalExpression < AdditiveExpression
+	RelationalExpression > AdditiveExpression
+	RelationalExpression <= AdditiveExpression
+	RelationalExpression >= AdditiveExpression
+	RelationalExpression instanceof ReferenceType
+
+EqualityExpression:
+	RelationalExpression
+	EqualityExpression == RelationalExpression
+	EqualityExpression != RelationalExpression
+
+AndExpression:
+	EqualityExpression
+	AndExpression & EqualityExpression
+
+InclusiveOrExpression:
+	AndExpression
+	InclusiveOrExpression | AndExpression
+
+ConditionalAndExpression:
+	InclusiveOrExpression
+	ConditionalAndExpression && InclusiveOrExpression
+
+ConditionalOrExpression:
+	ConditionalAndExpression
+	ConditionalOrExpression || ConditionalAndExpression
+
+AssignmentExpression:
+	ConditionalOrExpression
+	Assignment
+
+Assignment:
+	LeftHandSide = AssignmentExpression
+
+LeftHandSide:
+	Name
+	FieldAccess
+	ArrayAccess
+
+Expression:
+	AssignmentExpression
+
+ConstantExpression:
+	Expression
+
+Literal:
+	DecimalIntegerLiteral
+	BooleanLiteral
+	CharacterLiteral
+	StringLiteral
+	NullLiteral
+
+Type:
+	PrimitiveType
+	ReferenceType
+
+PrimitiveType:
+	NumericType
+	boolean
+
+NumericType: one of
+    byte short int char
+
+ReferenceType:
+	Name
+	ArrayType
+
+ClassType:
+	Name
+
+InterfaceType:
+	Name
+
+ArrayType:
+	PrimitiveType [ ]
+	Name [ ]

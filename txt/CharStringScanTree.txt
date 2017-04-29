@@ -1,0 +1,77 @@
+Character
+
+squote
+escape
+escapables
+allCharForChar
+
+zeroToThree
+gtThreeOctal
+octalDigits
+
+START
+	squote 1
+
+1 // [']
+	allCharForChar 2
+	escape 3
+
+2 // ['a]
+	squote 4
+
+3 // ['\]
+	escapables 2
+	zeroToThree 5
+	gtThreeOctal 6
+
+4* done-done
+
+5 // ['\0]
+	octalDigit 6
+	squote 4
+
+6 // ['\5]
+	octalDigit 2
+	squote 4
+
+
+String
+
+dquote
+escape
+escapables
+allCharForString
+
+zeroToThree
+gtThreeOctal
+octalDigits
+
+START
+	dquote 1
+
+1 // ["]
+	allCharForString 1
+	escape 2
+	dquote 3
+
+2 // ["\]
+	escapables 1
+	zeroToThree 4
+	gtThreeOctal 5
+
+3*
+
+4 // ["\0]
+	octalDigits 5
+	allCharForString 1
+	dquote 3
+	escape 2
+
+5 // ["\01]
+	octalDigits 1
+	allCharForString 1
+	dquote 3
+	escape 2
+	
+
+

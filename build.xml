@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="joosc" default="all">
+
+    <property name="src" location="src"/>
+    <property name="classes" location="out/classes"/>
+    <property name="jar"  location="out/jar"/>
+
+    <target name="init">
+        <mkdir dir="${classes}"/>
+    </target>
+
+    <!-- Compile code into classes -->
+    <target name="classes" depends="init">
+        <javac srcdir="${src}" destdir="${classes}"/>
+    </target>
+
+    <!-- Make a jar file for our joosc shell script to run -->
+    <target name="jar" depends="classes">
+        <mkdir dir="${jar}"/>
+        <jar destfile="${jar}/joosc.jar" basedir="${classes}">
+            <manifest>
+                <attribute name="Main-Class" value="Compiler"/>
+            </manifest>
+        </jar>
+    </target>
+
+    <target name="clean">
+        <delete dir="${classes}"/>
+        <delete dir="${jar}"/>
+    </target>
+
+    <target name="all" depends="clean, jar"/>
+
+</project>

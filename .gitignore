@@ -1,0 +1,7 @@
+out/**
+**/.idea/**
+**/.idea/workspace.xml
+src/**/*.class
+cs444.zip
+test_results.txt
+cs444.iml

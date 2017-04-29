@@ -1,0 +1,106 @@
+BOF bof
+EOF eof
+ID identifier
+DecimalIntegerLiteral
+HexIntegerLiteral
+OctalIntegerLiteral
+LongIntegerLiteral
+FloatingPointLiteral
+NullLiteral
+BooleanLiteral
+CharacterLiteral
+StringLiteral
+ABSTRACT abstract 
+DEFAULT default 
+IF if 
+PRIVATE private 
+THIS this 
+BOOLEAN boolean 
+DO do 
+IMPLEMENTS implements 
+PROTECTED protected 
+THROW throw 
+BREAK break 
+DOUBLE double 
+IMPORT import 
+PUBLIC public 
+THROWS throws 
+BYTE byte 
+ELSE else 
+INSTANCEOF instanceof 
+RETURN return 
+TRANSIENT transient 
+CASE case 
+EXTENDS extends 
+INT int 
+SHORT short 
+TRY try 
+CATCH catch 
+FINAL final 
+INTERFACE interface 
+STATIC static 
+VOID void 
+CHAR char 
+FINALLY finally 
+LONG long 
+STRICTFP strictfp
+VOLATILE volatile 
+CLASS class 
+FLOAT float 
+NATIVE native 
+SUPER super 
+WHILE while 
+CONST const 
+FOR for 
+NEW new 
+SWITCH switch 
+CONTINUE continue 
+GOTO goto 
+PACKAGE package 
+SYNCHRONIZED synchronized
+LPAREN (
+RPAREN )
+LBRACE {
+RBRACE }
+LBRACK [
+RBRACK ]
+SEMI ;
+COMMA ,
+DOT .
+BECOMES =
+GT >
+LT <
+NOT !
+FLIP ~
+QUESTION ?
+COLON :
+EQ ==
+LE <=
+GE >=
+NE !=
+AND &&
+OR ||
+PLUSPLUS ++
+MINUSMINUS --
+PLUS +
+MINUS -
+STAR *
+SLASH /
+BAND &
+BOR |
+BXOR ^
+MOD %
+BLSHIFT <<
+BRSHIFT >>
+BZEROFILL >>>
+PLUSASSIGN +=
+MINUSASSIGN -=
+MULTASSIGN *=
+DIVIDEASSIGN /=
+BANDASSIGN &=
+BORASSIGN |=
+BXORASSIGN ^=
+MODASSIGN %=
+BLSHIFTASSIGN <<=
+BRSHIFTASSIGN >>=
+BZEROFILLASSIGN >>>=
