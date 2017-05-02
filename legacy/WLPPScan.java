@@ -1,7 +1,7 @@
 
 import java.util.*;
 
-/** A sample main class demonstrating the use of the Scanner.Tokenizer.
+/** A sample main class demonstrating the use of the Tokenizer.Tokenizer.
  * This main class just outputs each line in the input, followed by
  * the tokens returned by the lexer for that line.
  *
@@ -118,7 +118,7 @@ class Token {
     }*/
 }
 
-/** Scanner.Tokenizer -- reads an input line, and partitions it into a list of tokens. */
+/** Tokenizer.Tokenizer -- reads an input line, and partitions it into a list of tokens. */
 class Lexer {
     public Lexer() {
         CharSet whitespace = new Chars("\t\n\r ");

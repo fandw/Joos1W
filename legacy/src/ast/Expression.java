@@ -34,8 +34,8 @@ public abstract class Expression extends ASTNode {
     private static String[] binaryOps = new String[] {
             "ConditionalOrExpression ConditionalOrExpression OR ConditionalAndExpression",
             "ConditionalAndExpression ConditionalAndExpression AND InclusiveOrExpression",
-            "InclusiveOrExpression InclusiveOrExpression BOR AndExpression",
-            "AndExpression AndExpression BAND EqualityExpression",
+            "InclusiveOrExpression InclusiveOrExpression EOR AndExpression",
+            "AndExpression AndExpression EAND EqualityExpression",
             "EqualityExpression EqualityExpression EQ RelationalExpression",
             "EqualityExpression EqualityExpression NE RelationalExpression",
             "RelationalExpression RelationalExpression LT AdditiveExpression",
