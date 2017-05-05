@@ -163,11 +163,7 @@ ConstructorDeclarator:
 	SimpleName ( FormalParameterListopt )
 
 ConstructorBody:
-	{ ExplicitConstructorInvocationopt BlockStatementsopt }
-
-ExplicitConstructorInvocation:
-	this ( ArgumentListopt ) ;
-	super ( ArgumentListopt ) ;
+	{ BlockStatementsopt }
 
 InterfaceDeclaration:
 	Modifiersopt interface Identifier ExtendsInterfacesopt InterfaceBody
@@ -385,12 +381,10 @@ Dims:
 
 FieldAccess:
 	Primary . Identifier
-	super . Identifier
 
 MethodInvocation:
 	Name ( ArgumentListopt )
 	Primary . Identifier ( ArgumentListopt )
-	super . Identifier ( ArgumentListopt )
 
 ArrayAccess:
 	Name [ Expression ]
