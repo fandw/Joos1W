@@ -79,7 +79,7 @@ Modifiers:
 Modifier: one of
 	public protected private
 	static
-	abstract final native synchronized transient volatile
+	abstract final native
 
 ClassDeclaration:
 	Modifiersopt class Identifier Superopt Interfacesopt ClassBody
@@ -233,7 +233,6 @@ StatementWithoutTrailingSubstatement:
 	BreakStatement
 	ContinueStatement
 	ReturnStatement
-	SynchronizedStatement
 	ThrowStatement
 	TryStatement
 
@@ -326,9 +325,6 @@ ReturnStatement:
 
 ThrowStatement:
 	throw Expression ;
-
-SynchronizedStatement:
-	synchronized ( Expression ) Block
 
 TryStatement:
 	try Block Catches
