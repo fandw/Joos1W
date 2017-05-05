@@ -103,7 +103,6 @@ ClassBodyDeclarations:
 
 ClassBodyDeclaration:
 	ClassMemberDeclaration
-	StaticInitializer
 	ConstructorDeclaration
 
 ClassMemberDeclaration:
@@ -152,9 +151,6 @@ ClassTypeList:
 MethodBody:
 	Block
 	;
-
-StaticInitializer:
-	static Block
 
 ConstructorDeclaration:
 	Modifiersopt ConstructorDeclarator Throwsopt ConstructorBody
