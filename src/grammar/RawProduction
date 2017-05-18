@@ -207,7 +207,6 @@ LocalVariableDeclaration:
 
 Statement:
 	StatementWithoutTrailingSubstatement
-	LabeledStatement
 	IfThenStatement
 	IfThenElseStatement
 	WhileStatement
@@ -215,7 +214,6 @@ Statement:
 
 StatementNoShortIf:
 	StatementWithoutTrailingSubstatement
-	LabeledStatementNoShortIf
 	IfThenElseStatementNoShortIf
 	WhileStatementNoShortIf
 	ForStatementNoShortIf
@@ -224,22 +222,12 @@ StatementWithoutTrailingSubstatement:
 	Block
 	EmptyStatement
 	ExpressionStatement
-	SwitchStatement
-	DoStatement
-	BreakStatement
-	ContinueStatement
 	ReturnStatement
 	ThrowStatement
 	TryStatement
 
 EmptyStatement:
 	;
-
-LabeledStatement:
-	Identifier : Statement
-
-LabeledStatementNoShortIf:
-	Identifier : StatementNoShortIf
 
 ExpressionStatement:
 	StatementExpression ;
@@ -262,59 +250,18 @@ IfThenElseStatement:
 IfThenElseStatementNoShortIf:
 	if ( Expression ) StatementNoShortIf else StatementNoShortIf
 
-SwitchStatement:
-	switch ( Expression ) SwitchBlock
-
-SwitchBlock:
-	{ SwitchBlockStatementGroupsopt SwitchLabelsopt }
-
-SwitchBlockStatementGroups:
-	SwitchBlockStatementGroup
-	SwitchBlockStatementGroups SwitchBlockStatementGroup
-
-SwitchBlockStatementGroup:
-	SwitchLabels BlockStatements
-
-SwitchLabels:
-	SwitchLabel
-	SwitchLabels SwitchLabel
-
-SwitchLabel:
-	case ConstantExpression :
-	default :
-
 WhileStatement:
 	while ( Expression ) Statement
 
 WhileStatementNoShortIf:
 	while ( Expression ) StatementNoShortIf
 
-DoStatement:
-	do Statement while ( Expression ) ;
-
 ForStatement:
-	for ( ForInitopt ; Expressionopt ; ForUpdateopt ) Statement
+	for ( LocalVariableDeclaration ; Expressionopt ; StatementExpression ) Statement
 
 ForStatementNoShortIf:
 
-	for ( ForInitopt ; Expressionopt ; ForUpdateopt ) StatementNoShortIf
-
-ForInit:
-	StatementExpressionList
-	LocalVariableDeclaration
-
-ForUpdate:
-	StatementExpressionList
-
-StatementExpressionList:
-	StatementExpression
-	StatementExpressionList , StatementExpression
-
-BreakStatement:
-	break Identifieropt ;
-
-ContinueStatement:
-	continue Identifieropt ;
+	for ( LocalVariableDeclaration ; Expressionopt ; StatementExpression ) StatementNoShortIf
 
 ReturnStatement:
 	return Expressionopt ;
