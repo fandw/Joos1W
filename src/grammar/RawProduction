@@ -127,8 +127,8 @@ MethodDeclaration:
 	MethodHeader MethodBody
 
 MethodHeader:
-	Modifiersopt Type MethodDeclarator Throwsopt
-	Modifiersopt void MethodDeclarator Throwsopt
+	Modifiersopt Type MethodDeclarator
+	Modifiersopt void MethodDeclarator
 
 MethodDeclarator:
 	Identifier ( FormalParameterListopt )
@@ -141,9 +141,6 @@ FormalParameterList:
 FormalParameter:
 	Type VariableDeclaratorId
 
-Throws:
-	throws ClassTypeList
-
 ClassTypeList:
 	ClassType
 	ClassTypeList , ClassType
@@ -153,7 +150,7 @@ MethodBody:
 	;
 
 ConstructorDeclaration:
-	Modifiersopt ConstructorDeclarator Throwsopt ConstructorBody
+	Modifiersopt ConstructorDeclarator ConstructorBody
 
 ConstructorDeclarator:
 	SimpleName ( FormalParameterListopt )
@@ -223,8 +220,6 @@ StatementWithoutTrailingSubstatement:
 	EmptyStatement
 	ExpressionStatement
 	ReturnStatement
-	ThrowStatement
-	TryStatement
 
 EmptyStatement:
 	;
@@ -265,23 +260,6 @@ ForStatementNoShortIf:
 
 ReturnStatement:
 	return Expressionopt ;
-
-ThrowStatement:
-	throw Expression ;
-
-TryStatement:
-	try Block Catches
-	try Block Catchesopt Finally
-
-Catches:
-	CatchClause
-	Catches CatchClause
-
-CatchClause:
-	catch ( FormalParameter ) Block
-
-Finally:
-	finally Block
 
 Primary:
 	PrimaryNoNewArray
