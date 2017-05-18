@@ -6,3 +6,5 @@ final locals
 
 omitted constructor
 closest match*
+
+Local variable in own initializer —> static analyze
