@@ -121,7 +121,6 @@ VariableDeclaratorId:
 
 VariableInitializer:
 	Expression
-	ArrayInitializer
 
 MethodDeclaration:
 	MethodHeader MethodBody
@@ -176,9 +175,6 @@ InterfaceMemberDeclaration:
 
 AbstractMethodDeclaration:
 	MethodHeader ;
-
-ArrayInitializer:
-	{ VariableInitializersopt ,opt }
 
 VariableInitializers:
 	VariableInitializer

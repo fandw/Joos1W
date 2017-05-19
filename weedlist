@@ -8,3 +8,6 @@ omitted constructor
 closest match*
 
 Local variable in own initializer —> static analyze
+
+Class literals
+
