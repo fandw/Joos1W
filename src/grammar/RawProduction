@@ -113,7 +113,7 @@ FieldDeclaration:
 	Modifiersopt Type VariableDeclarator ;
 
 VariableDeclarator:
-	VariableDeclaratorId = VariableInitializer
+	Identifier = VariableInitializer
 
 VariableDeclaratorId:
 	Identifier
@@ -132,7 +132,6 @@ MethodHeader:
 
 MethodDeclarator:
 	Identifier ( FormalParameterListopt )
-	MethodDeclarator [ ]
 
 FormalParameterList:
 	FormalParameter
@@ -282,19 +281,14 @@ ArgumentList:
 	ArgumentList , Expression
 
 ArrayCreationExpression:
-	new PrimitiveType DimExprs Dimsopt
-	new ClassOrInterfaceType DimExprs Dimsopt
-
-DimExprs:
-	DimExpr
-	DimExprs DimExpr
+	new PrimitiveType DimExprs
+	new ClassOrInterfaceType DimExprs
 
 DimExpr:
 	[ Expression ]
 
-Dims:
+Dim:
 	[ ]
-	Dims [ ]
 
 FieldAccess:
 	Primary . Identifier
@@ -339,9 +333,9 @@ UnaryExpressionNotPlusMinus:
 	CastExpression
 
 CastExpression:
-	( PrimitiveType Dimsopt ) UnaryExpression
+	( PrimitiveType Dimopt ) UnaryExpression
 	( Expression ) UnaryExpressionNotPlusMinus
-	( Name Dims ) UnaryExpressionNotPlusMinus
+	( Name Dim ) UnaryExpressionNotPlusMinus
 
 MultiplicativeExpression:
 	UnaryExpression
