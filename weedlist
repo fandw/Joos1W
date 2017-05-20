@@ -11,3 +11,4 @@ Local variable in own initializer —> static analyze
 
 Class literals
 
+Implicit integer constant casts

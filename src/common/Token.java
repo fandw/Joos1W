@@ -5,14 +5,13 @@ import util.Location;
 /**
  * Created by daiweifan on 2017-04-29.
  */
-public class Token {
+public class Token extends ProductionElement {
     private TokenType type;
-    private String lexeme;
     private Location location;
 
     public Token(TokenType type, String lexeme, int line, int column, String filePath) {
+        super(lexeme);
         this.type = type;
-        this.lexeme = lexeme;
         this.location = new Location(line, column, filePath);
     }
 
@@ -26,6 +25,10 @@ public class Token {
 
     public Location getLocation() {
         return location;
+    }
+
+    public void setLexeme(String lexeme) {
+        this.lexeme = lexeme;
     }
 
 }

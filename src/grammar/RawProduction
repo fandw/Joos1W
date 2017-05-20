@@ -224,10 +224,6 @@ ExpressionStatement:
 
 StatementExpression:
 	Assignment
-	PreIncrementExpression
-	PreDecrementExpression
-	PostIncrementExpression
-	PostDecrementExpression
 	MethodInvocation
 	ClassInstanceCreationExpression
 
@@ -277,8 +273,8 @@ ArgumentList:
 	ArgumentList , Expression
 
 ArrayCreationExpression:
-	new PrimitiveType DimExprs
-	new ClassOrInterfaceType DimExprs
+	new PrimitiveType DimExpr
+	new ClassOrInterfaceType DimExpr
 
 DimExpr:
 	[ Expression ]
@@ -300,31 +296,13 @@ ArrayAccess:
 PostfixExpression:
 	Primary
 	Name
-	PostIncrementExpression
-	PostDecrementExpression
-
-PostIncrementExpression:
-	PostfixExpression ++
-
-PostDecrementExpression:
-	PostfixExpression --
 
 UnaryExpression:
-	PreIncrementExpression
-	PreDecrementExpression
-	+ UnaryExpression
 	- UnaryExpression
 	UnaryExpressionNotPlusMinus
 
-PreIncrementExpression:
-	++ UnaryExpression
-
-PreDecrementExpression:
-	-- UnaryExpression
-
 UnaryExpressionNotPlusMinus:
 	PostfixExpression
-	~ UnaryExpression
 	! UnaryExpression
 	CastExpression
 
@@ -344,14 +322,8 @@ AdditiveExpression:
 	AdditiveExpression + MultiplicativeExpression
 	AdditiveExpression - MultiplicativeExpression
 
-ShiftExpression:
-	AdditiveExpression
-	ShiftExpression << AdditiveExpression
-	ShiftExpression >> AdditiveExpression
-	ShiftExpression >>> AdditiveExpression
-
 RelationalExpression:
-	ShiftExpression
+	AdditiveExpression
 	RelationalExpression < ShiftExpression
 	RelationalExpression > ShiftExpression
 	RelationalExpression <= ShiftExpression
@@ -367,12 +339,8 @@ AndExpression:
 	EqualityExpression
 	AndExpression & EqualityExpression
 
-ExclusiveOrExpression:
-	AndExpression
-	ExclusiveOrExpression ^ AndExpression
-
 InclusiveOrExpression:
-	ExclusiveOrExpression
+	AndExpression
 	InclusiveOrExpression | ExclusiveOrExpression
 
 ConditionalAndExpression:
@@ -383,24 +351,17 @@ ConditionalOrExpression:
 	ConditionalAndExpression
 	ConditionalOrExpression || ConditionalAndExpression
 
-ConditionalExpression:
-	ConditionalOrExpression
-	ConditionalOrExpression ? Expression : ConditionalExpression
-
 AssignmentExpression:
-	ConditionalExpression
+	ConditionalOrExpression
 	Assignment
 
 Assignment:
-	LeftHandSide AssignmentOperator AssignmentExpression
+	LeftHandSide = AssignmentExpression
 
 LeftHandSide:
 	Name
 	FieldAccess
 	ArrayAccess
-
-AssignmentOperator: one of
-	= *= /= %= += -= <<= >>= >>>= &= ^= |=
 
 Expression:
 	AssignmentExpression
