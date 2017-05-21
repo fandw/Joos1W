@@ -10,22 +10,22 @@ import java.util.ArrayList;
  * Created by daiweifan on 2017-05-18.
  */
 public class ProductionRule {
-    private NonTerminal lhs;
+    private String lhs;
     private ArrayList<RHSElement> rhsElements = new ArrayList<>();
 
     public ProductionRule(String lhs) {
-        this.lhs = new NonTerminal(lhs);
+        this.lhs = lhs;
     }
 
-    public void addRHS(RHSElement rhsElement) {
+    public void add_RHS(RHSElement rhsElement) {
         rhsElements.add(rhsElement);
     }
 
-    public NonTerminal getLhs() {
+    public String get_LHS() {
         return lhs;
     }
 
-    public ArrayList<RHSElement> getRhsElements() {
+    public ArrayList<RHSElement> get_RHS_elements() {
         return rhsElements;
     }
 }

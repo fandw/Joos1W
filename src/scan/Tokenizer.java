@@ -16,9 +16,9 @@ import java.util.Scanner;
  * Created by daiweifan on 2017-04-28.
  */
 public class Tokenizer {
-    private static TransitionSet transitionSet = TransitionSet.getTransitionSet();
+    private static TransitionSet transitionSet = TransitionSet.get_transition_set();
 
-    public static List<Token> scan(String filePath) throws ScannerException, FileNotFoundException{
+    public static List<Token> scan(String filePath) throws ScannerException, FileNotFoundException {
         List<Token> tokenList = new ArrayList<>();
         BufferedInputStream inputStream = new BufferedInputStream(new FileInputStream(filePath));
         Scanner in = new Scanner(inputStream);
@@ -38,7 +38,7 @@ public class Tokenizer {
 
             while (charPointer <= line.length()) {
                 char currentChar = charPointer == line.length() ? '\n' : line.charAt(charPointer);
-                State toState = transitionSet.findToState(state, currentChar);
+                State toState = transitionSet.find_to_state(state, currentChar);
                 if (toState == null) {
                     // restore to in-comment state
                     if (state == State.RCOMMEN || state == State.INCOMMENT) {
@@ -54,27 +54,27 @@ public class Tokenizer {
                     }
 
                     // state not final
-                    if (state.getValidType() == null) {
+                    if (state.get_valid_type() == null) {
                         throw new ScannerException(new Location(lineNumber, charPointer, filePath),
                                 "Invalid Token " + line.substring(startIndex, charPointer));
                     }
 
                     // special literals or keywords
-                    if (state.getValidType() == TokenType.ID) {
+                    if (state.get_valid_type() == TokenType.ID) {
                         if (line.substring(startIndex, charPointer).equals("true") ||
-                            line.substring(startIndex, charPointer).equals("false")) {
+                                line.substring(startIndex, charPointer).equals("false")) {
                             state = State.BooleanLiteral;
                         } else if (line.substring(startIndex, charPointer).equals("null")) {
                             state = State.NullLiteral;
-                        } else if (Keyword.getKeywordSet().containsKey(line.substring(startIndex, charPointer))) {
+                        } else if (Keyword.get_keyword_set().containsKey(line.substring(startIndex, charPointer))) {
                             state = State.KEYWORD;
-                            state.setKeywordTokenType(line.substring(startIndex, charPointer));
+                            state.set_keyword_token_type(line.substring(startIndex, charPointer));
                         }
                     }
 
                     // special tokens that are not recorded. ex: whitespaces, comments
-                    if (state.getValidType() != TokenType.SPECIAL) {
-                        tokenList.add(new Token(state.getValidType(), line.substring(startIndex, charPointer),
+                    if (state.get_valid_type() != TokenType.SPECIAL) {
+                        tokenList.add(new Token(state.get_valid_type(), line.substring(startIndex, charPointer),
                                 lineNumber, startIndex, filePath));
                     }
 

@@ -7,7 +7,8 @@ import java.util.HashMap;
  */
 class TransitionSet {
 
-    static HashMap<State, HashMap<CharSet, State>> collection = new HashMap<>();
+    private static TransitionSet transitionSet;
+    private HashMap<State, HashMap<CharSet, State>> collection = new HashMap<>();
 
     private void add(Transition t) {
         if (collection.containsKey(t.fromState)) {
@@ -21,7 +22,7 @@ class TransitionSet {
         }
     }
 
-    State findToState(State state, char c) {
+    State find_to_state(State state, char c) {
         if (collection.containsKey(state)) {
             for (CharSet set : collection.get(state).keySet()) {
                 if (set.contains(c)) {
@@ -34,8 +35,9 @@ class TransitionSet {
 
     private TransitionSet() {}
 
-    static TransitionSet getTransitionSet() {
-        TransitionSet transitionSet = new TransitionSet();
+    static TransitionSet get_transition_set() {
+        if (transitionSet != null) return transitionSet;
+        transitionSet = new TransitionSet();
 
         CharSet whitespace = new Chars("\t\n\r ");
         CharSet letters = new CharsIDStart();

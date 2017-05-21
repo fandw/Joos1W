@@ -85,12 +85,12 @@ enum State {
         this.validType = TokenType.SPECIAL;
     }
 
-    TokenType getValidType() {
+    TokenType get_valid_type() {
         return validType;
     }
 
-    void setKeywordTokenType(String keyword) {
-        if (!Keyword.getKeywordSet().containsKey(keyword)) return;
-        validType = Keyword.getKeywordSet().get(keyword);
+    void set_keyword_token_type(String keyword) {
+        if (!Keyword.get_keyword_set().containsKey(keyword)) return;
+        validType = Keyword.get_keyword_set().get(keyword);
     }
 }

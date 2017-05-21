@@ -43,7 +43,7 @@ class Keyword {
 
     private Keyword() {}
 
-    public static HashMap<String, TokenType> getKeywordSet() {
+    public static HashMap<String, TokenType> get_keyword_set() {
         return keywordSet;
     }
 }

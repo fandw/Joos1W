@@ -21,7 +21,7 @@ public class ParseProductions {
     private static HashMap<String, String> setTerminals = new HashMap<>();
 
     public static void main(String args[]) {
-        getTerminals();
+        get_terminals();
         ParseProductions engine = new ParseProductions();
         engine.run();
         engine.header();
@@ -30,7 +30,7 @@ public class ParseProductions {
 
     }
 
-    private static void getTerminals() {
+    private static void get_terminals() {
         InputStream copyIn = System.in;
         try {
             System.setIn(new BufferedInputStream(new FileInputStream("src/grammar/TokensInput")));
@@ -89,12 +89,12 @@ public class ParseProductions {
                 String tokenText = optional_token ? token.substring(0, token.length() - 3) : token;
                 RHSElement rhsElement = new RHSElement(tokenText, optional_token);
                 if (setTerminals.containsKey(tokenText)) {
-                    rhsElement.setRhs(setTerminals.get(rhsElement.getRhs()));
-                    terminal.add(rhsElement.getRhs());
-                } else if (rhsElement.getRhs().equals(rhsElement.getRhs().toLowerCase())) {
-                    terminal.add(rhsElement.getRhs());
+                    rhsElement.set_RHS(setTerminals.get(rhsElement.get_RHS()));
+                    terminal.add(rhsElement.get_RHS());
+                } else if (rhsElement.get_RHS().equals(rhsElement.get_RHS().toLowerCase())) {
+                    terminal.add(rhsElement.get_RHS());
                 } else {
-                    nonTerminal.add(rhsElement.getRhs());
+                    nonTerminal.add(rhsElement.get_RHS());
                 }
 
                 if (one_of) {
@@ -108,7 +108,7 @@ public class ParseProductions {
                     }
                 }
                 assert newRule != null;
-                newRule.addRHS(rhsElement);
+                newRule.add_RHS(rhsElement);
             }
         }
         System.out.flush();
@@ -130,7 +130,7 @@ public class ParseProductions {
         int total = 0;
         for (ProductionRule r : this.rules) {
             int count = 0;
-            for (RHSElement rhs : r.getRhsElements()) {
+            for (RHSElement rhs : r.get_RHS_elements()) {
                 if (rhs.optional) count++;
             }
             total += Math.pow(2, count);
@@ -145,27 +145,27 @@ public class ParseProductions {
     }
 
     private void node(ProductionRule r, int rhsIndex) {
-        if (rhsIndex == r.getRhsElements().size()) {
+        if (rhsIndex == r.get_RHS_elements().size()) {
             print(r);
             return;
         }
-        if (r.getRhsElements().get(rhsIndex).optional) {
-            r.getRhsElements().get(rhsIndex).print = false;
+        if (r.get_RHS_elements().get(rhsIndex).optional) {
+            r.get_RHS_elements().get(rhsIndex).print = false;
             node(r, rhsIndex + 1);
-            r.getRhsElements().get(rhsIndex).print = true;
+            r.get_RHS_elements().get(rhsIndex).print = true;
             node(r, rhsIndex + 1);
         } else {
-            r.getRhsElements().get(rhsIndex).print = true;
+            r.get_RHS_elements().get(rhsIndex).print = true;
             node(r, rhsIndex + 1);
         }
 
     }
 
     private void print(ProductionRule r) {
-        System.out.print(r.getLhs().getLexeme() + " ");
-        for (RHSElement rhsElement : r.getRhsElements()) {
+        System.out.print(r.get_LHS() + " ");
+        for (RHSElement rhsElement : r.get_RHS_elements()) {
             if (rhsElement.print) {
-                System.out.print(rhsElement.getRhs() + " ");
+                System.out.print(rhsElement.get_RHS() + " ");
             }
         }
         System.out.println();

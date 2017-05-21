@@ -8,7 +8,7 @@ public class RHSElement {
     public String rhs;
     public boolean print;
 
-    RHSElement(String rhs) {
+    public RHSElement(String rhs) {
         this.rhs = rhs;
         this.optional = false;
     }
@@ -22,11 +22,11 @@ public class RHSElement {
         return rhs.equals(t);
     }
 
-    public String getRhs() {
+    public String get_RHS() {
         return rhs;
     }
 
-    public void setRhs(String rhs) {
+    public void set_RHS(String rhs) {
         this.rhs = rhs;
     }
 }
